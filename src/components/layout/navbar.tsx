@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 import { Home, BarChart3, Play, ClipboardList, Dribbble, Menu, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
@@ -34,12 +32,13 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ href, label, icon: Icon, className }: NavLinkProps) => {
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
   const isActive = (pathname === href) || (pathname.startsWith(href) && href !== '/');
 
   return (
     <Link
-      href={href}
+      to={href}
       className={cn(
         'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors',
         isActive
@@ -60,7 +59,8 @@ interface NavbarProps {
 }
 
 export function Navbar({ title, logoUrl }: NavbarProps) {
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const [isMounted, setIsMounted] = useState(false);
@@ -111,9 +111,9 @@ export function Navbar({ title, logoUrl }: NavbarProps) {
               <SheetTitle className="sr-only">Menú de Navegación</SheetTitle>
             </SheetHeader>
               <div className="p-4">
-                   <Link href="/" className="flex items-center gap-2 text-primary font-bold text-lg mb-8">
+                   <Link to="/" className="flex items-center gap-2 text-primary font-bold text-lg mb-8">
                       {logoUrl ? (
-                        <Image src={logoUrl} alt={`${title} logo`} width={32} height={32} className="h-8 w-8 object-contain"/>
+                        <img src={logoUrl} alt={`${title} logo`} className="h-8 w-8 object-contain"/>
                       ) : (
                         <Dribbble className="h-6 w-6" />
                       )}
@@ -147,9 +147,9 @@ export function Navbar({ title, logoUrl }: NavbarProps) {
       isScrolled && "border-b border-border shadow-lg"
     )}>
       <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 text-primary font-bold text-lg">
+        <Link to="/" className="flex items-center gap-2 text-primary font-bold text-lg">
           {logoUrl ? (
-            <Image src={logoUrl} alt={`${title} logo`} width={32} height={32} className="h-8 w-8 object-contain"/>
+            <img src={logoUrl} alt={`${title} logo`} className="h-8 w-8 object-contain"/>
           ) : (
             <Dribbble className="h-6 w-6" />
           )}

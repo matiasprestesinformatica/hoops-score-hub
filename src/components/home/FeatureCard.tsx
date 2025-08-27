@@ -1,5 +1,5 @@
 "use client";
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -27,7 +27,7 @@ export function FeatureCard({ title, description, link, linkText, icon }: Featur
         </div>
       </CardHeader>
       <CardContent className="mt-auto">
-        <Link href={link} passHref>
+        <Link to={link}>
           <Button variant="secondary" className="w-full">
             {linkText}
             <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />

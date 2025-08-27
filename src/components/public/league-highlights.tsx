@@ -1,68 +1,89 @@
-import { getLeagueHomepageData } from "@/lib/actions/seasons";
-import { StandingsTable } from "./standings-table";
-import { FixtureList } from "./fixture-list";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Calendar, Trophy, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
-export async function LeagueHighlights() {
-    const data = await getLeagueHomepageData();
+// Mock data para desarrollo
+const mockLeagues = [
+  {
+    id: '1',
+    name: 'Liga Nacional',
+    description: 'Liga profesional de baloncesto',
+    status: 'ACTIVA',
+    teams: 8,
+    gamesPlayed: 24,
+    currentSeason: 'Temporada 2024'
+  },
+  {
+    id: '2', 
+    name: 'Liga Regional',
+    description: 'Competición regional de equipos locales',
+    status: 'ACTIVA',
+    teams: 6,
+    gamesPlayed: 18,
+    currentSeason: 'Temporada 2024'
+  }
+];
 
-    if (!data || !data.season) {
-        return (
-            <section className="container mx-auto py-12 px-4">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>No hay datos de la liga</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p>No se pudo cargar la información de la liga. Por favor, configura una liga y temporada en el panel de administración.</p>
-                    </CardContent>
-                </Card>
-            </section>
-        )
-    }
-
-    return (
-        <section className="bg-card py-16 sm:py-24">
-            <div className="container mx-auto px-4">
-                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                        {data.league.name} - {data.season.name}
-                    </h2>
-                    <p className="mt-4 text-lg text-muted-foreground">
-                        Clasificación y próximos partidos de la temporada actual.
-                    </p>
+export function LeagueHighlights() {
+  return (
+    <section className="py-16 bg-gradient-to-b from-secondary/30 to-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mb-4">
+            Ligas Destacadas
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Explora las competiciones activas y mantente al día con los últimos resultados
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {mockLeagues.map((league) => (
+            <Card key={league.id} className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">{league.name}</CardTitle>
+                  <Badge variant="outline" className="bg-green-500/10 text-green-700 border-green-500/20">
+                    {league.status}
+                  </Badge>
                 </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                    {data.standings && data.standings.length > 0 ? (
-                        <StandingsTable standings={data.standings} />
-                    ) : (
-                         <Card>
-                            <CardHeader>
-                                <CardTitle>Tabla de Posiciones no Disponible</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p>La tabla de posiciones se mostrará cuando comiencen los partidos.</p>
-                            </CardContent>
-                        </Card>
-                    )}
-                    
-                    {/* Añadida comprobación para data.fixture */}
-                    {data.fixture && <FixtureList games={data.fixture} />}
+                <p className="text-muted-foreground">{league.description}</p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="text-center">
+                    <div className="flex items-center justify-center mb-2">
+                      <Users className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="text-2xl font-bold text-primary">{league.teams}</div>
+                    <div className="text-sm text-muted-foreground">Equipos</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="flex items-center justify-center mb-2">
+                      <Trophy className="h-5 w-5 text-secondary" />
+                    </div>
+                    <div className="text-2xl font-bold text-secondary">{league.gamesPlayed}</div>
+                    <div className="text-sm text-muted-foreground">Partidos</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="flex items-center justify-center mb-2">
+                      <Calendar className="h-5 w-5 text-accent" />
+                    </div>
+                    <div className="text-sm font-medium text-accent">{league.currentSeason}</div>
+                  </div>
                 </div>
-
-                <div className="mt-12 text-center">
-                    <Button asChild variant="secondary">
-                        <Link href="/stats">
-                            Ver Todas las Estadísticas
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                    </Button>
-                </div>
-            </div>
-        </section>
-    )
+                <Link to={`/leagues/${league.id}`}>
+                  <Button className="w-full" variant="outline">
+                    Ver Liga
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

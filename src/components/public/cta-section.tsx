@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export function CallToActionSection() {
   return (
@@ -13,7 +13,7 @@ export function CallToActionSection() {
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Button asChild size="lg">
-            <Link href="/admin">Empezar a Gestionar</Link>
+            <Link to="/admin">Empezar a Gestionar</Link>
           </Button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export function HeroSection() {
   return (
@@ -13,7 +13,7 @@ export function HeroSection() {
         </p>
         <div className="mt-8">
           <Button asChild size="lg">
-            <Link href="/stats/leaders">Ver Clasificación</Link>
+            <Link to="/stats/leaders">Ver Clasificación</Link>
           </Button>
         </div>
       </div>

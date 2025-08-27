@@ -1,0 +1,22 @@
+'use client';
+import { AdminNavbar } from './_components/admin-navbar';
+import { AdminSidebar } from './_components/admin-sidebar';
+
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+  return (
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] bg-background">
+      <AdminSidebar />
+      <div className="flex flex-col">
+        <AdminNavbar />
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}

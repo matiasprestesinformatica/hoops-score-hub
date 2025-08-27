@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 200 43% 96%;
+    --foreground: 212 71% 10%;
+    --card: 200 43% 96%;
+    --card-foreground: 212 71% 10%;
+    --popover: 200 43% 96%;
+    --popover-foreground: 212 71% 10%;
+    --primary: 208 73% 27%;
+    --primary-foreground: 200 43% 96%;
+    --secondary: 214 69% 92%;
+    --secondary-foreground: 212 71% 10%;
+    --muted: 214 69% 92%;
+    --muted-foreground: 208 26% 46%;
+    --accent: 214 69% 92%;
+    --accent-foreground: 212 71% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 69% 82%;
+    --input: 214 69% 82%;
+    --ring: 208 73% 27%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 212 71% 10%;
+    --foreground: 200 43% 96%;
+    --card: 212 71% 12%;
+    --card-foreground: 200 43% 96%;
+    --popover: 212 71% 10%;
+    --popover-foreground: 200 43% 96%;
+    --primary: 208 73% 27%;
+    --primary-foreground: 200 43% 96%;
+    --secondary: 214 69% 22%;
+    --secondary-foreground: 200 43% 96%;
+    --muted: 214 69% 22%;
+    --muted-foreground: 208 26% 66%;
+    --accent: 214 69% 22%;
+    --accent-foreground: 200 43% 96%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 69% 22%;
+    --input: 214 69% 22%;
+    --ring: 208 26% 66%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  .writing-vertical-rl {
+    writing-mode: vertical-rl;
+  }
+  .body-with-background {
+    background-image: url('/cancha.png'); /* Reemplaza con tu imagen en /public/images/background.jpg */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  }
+}

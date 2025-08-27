@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				basketball: {
+					orange: 'hsl(var(--basketball-orange))',
+					court: 'hsl(var(--basketball-court-wood))',
+					lines: 'hsl(var(--basketball-court-lines))',
+					dark: 'hsl(var(--basketball-dark))',
+					blue: 'hsl(var(--basketball-blue))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +91,49 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'basketball-bounce': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-20px)'
+					}
+				},
+				'glow': {
+					'0%': {
+						boxShadow: '0 0 20px hsl(var(--basketball-orange) / 0.3)'
+					},
+					'100%': {
+						boxShadow: '0 0 40px hsl(var(--basketball-orange) / 0.6)'
+					}
+				},
+				'slide-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'basketball-bounce': 'basketball-bounce 0.6s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite alternate',
+				'slide-up': 'slide-up 0.5s ease-out'
+			},
+			backgroundImage: {
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-court': 'var(--gradient-court)',
+				'gradient-card': 'var(--gradient-card)'
+			},
+			boxShadow: {
+				'glow': 'var(--shadow-glow)',
+				'court': 'var(--shadow-court)'
 			}
 		}
 	},
